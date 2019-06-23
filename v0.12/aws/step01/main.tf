@@ -11,8 +11,10 @@ resource "aws_instance" "web-server" {
 
   user_data = <<EOF
     #!/bin/bash
-    yum install -y httpd
-    systemctl start httpd.service
+    sudo yum -y install git
+    git clone https://github.com/sky0621/go-experiment.git
+    cd go-experiment
+    ./go-experiment
 EOF
 }
 

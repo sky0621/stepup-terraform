@@ -1,0 +1,33 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/milo-minderbinder/AWS-PlantUML/release/18-2-22/dist
+
+!includeurl AWSPUML/common.puml
+
+!includeurl AWSPUML/General/client/client.puml
+!includeurl AWSPUML/General/Internet/Internet.puml
+!includeurl AWSPUML/General/AWScloud/AWScloud.puml
+!includeurl AWSPUML/Compute/AmazonVPC/AmazonVPC.puml
+!includeurl AWSPUML/Compute/AmazonVPC/Internetgateway/Internetgateway.puml
+!includeurl AWSPUML/Compute/AmazonVPC/router/router.puml
+!includeurl AWSPUML/Compute/AmazonEC2/AmazonEC2.puml
+
+CLIENT(cli)
+
+INTERNET(in)
+
+AWSCLOUD(aws) {
+    AMAZONVPC(vpc01, "default") {
+        package "subnet - default" {
+            INTERNETGATEWAY(ig01, "default")
+            ROUTER(rt01, "default")
+            AMAZONEC2(is01, "Web Application Server")
+        }
+    }
+}
+
+cli -> in
+in -> ig01
+ig01 -> rt01
+rt01 -> is01
+
+@enduml
